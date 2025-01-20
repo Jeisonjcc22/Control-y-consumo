@@ -5,6 +5,4 @@ Frameworks y estándares:
 - Framework backend: Express.js v4.21.2
 - Base de datos: Mariadb MySQL v10.4.32
 - Conector MySQL Node.js: v3.12.0
-- Frontend: HTML5, CSS3, Vanilla JavaScript
-- API: REST API
-- Estándar de despliegue: Netlify (Frontend), Node.js Server (Backend)
+- Frontend: HTML5, CSS3
