@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciar sesión</title>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <title>Inicio de Sesión</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                background-color: #f4f4f9;
+            }
+            .login-container {
+                width: 300px;
+                padding: 20px;
+                background: white;
+                box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+            }
+            .login-container h2 {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            .login-container input {
+                width: 93%;
+                padding: 10px;
+                margin-bottom: 15px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+            .login-container button {
+                width: 100%;
+                padding: 10px;
+                background: #007bff;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            .login-container button:hover {
+                background: #0056b3;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="login-container">
+            <h2>Iniciar Sesión</h2>
+            <form id="loginForm">
+                <input type="text" id="usuario" placeholder="Usuario" required />
+                <input type="password" id="password" placeholder="Contraseña" required />
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+        </div>
+    <script>
+     document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const usuario = document.getElementById('usuario').value;
+    const password = document.getElementById('password').value;
+
+    const response = await fetch('auth/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ usuario, password }),
+    });
+
+    const result = await response.json();
+    if (result.success) {
+        // Guardar datos del usuario en localStorage
+        localStorage.setItem('user', JSON.stringify(result.user));
+
+        alert('Inicio de sesión exitoso');
+        window.location.href = '/PRUEBAS.html';
+    } else {
+        alert('Usuario o contraseña incorrectos');
+    }
+});
+  </script>
+  </body>
+</html>
