@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-01-2025 a las 02:39:20
+-- Tiempo de generación: 22-01-2025 a las 00:46:45
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.0.30
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -149,15 +149,27 @@ INSERT INTO `movimientos` (`id_movimiento`, `id_usuario`, `id_casos`, `fecha_mov
 (9, 1019154549, 'CS001000', '2025-01-18', 'FTX0197374', NULL, 'ASDA\n', NULL),
 (10, 1019154549, 'CS001000', '2025-01-18', 'FTX0197374', NULL, 'ASDASD', NULL),
 (11, 1019154549, 'CS001000', '2025-01-18', 'FTX0197374', NULL, 'Pruebas', NULL),
-(12, 1019154549, 'CS001000', '2025-01-18', 'FTX0197374', NULL, 'Pruebas 2', NULL);
+(12, 1019154549, 'CS001000', '2025-01-18', 'FTX0197374', NULL, 'Pruebas 2', NULL),
+(13, 1019154549, 'CS001000', '2025-01-18', 'FTX0197374', NULL, 'Pruebas', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `proveedor`
+-- Estructura de tabla para la tabla `roles`
 --
--- Error leyendo la estructura de la tabla ccm.proveedor: #1932 - Table 'ccm.proveedor' doesn't exist in engine
--- Error leyendo datos de la tabla ccm.proveedor: #1064 - Algo está equivocado en su sintax cerca 'FROM `ccm`.`proveedor`' en la linea 1
+
+CREATE TABLE `roles` (
+  `rol` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `roles`
+--
+
+INSERT INTO `roles` (`rol`) VALUES
+('admin'),
+('supervisor'),
+('usuario');
 
 -- --------------------------------------------------------
 
@@ -170,6 +182,7 @@ CREATE TABLE `usuarios` (
   `nombres` varchar(50) NOT NULL,
   `apellidos` varchar(50) NOT NULL,
   `contraseña` varchar(15) NOT NULL,
+  `rol` varchar(20) NOT NULL,
   `correo` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
@@ -177,10 +190,10 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuario`, `nombres`, `apellidos`, `contraseña`, `correo`) VALUES
-(1003837586, 'Cristhian', 'Rocha', '1234cristhian', 'cristhian.rocha@gmail.com'),
-(1019154549, 'Jeison Javier', 'Contreras Cañizares', '1234jeison', 'jeison.contreras@gmail.com'),
-(1032418528, 'Caren Yulieth', 'Carrillo', '1234caren', 'caren.carillo@gmail.com');
+INSERT INTO `usuarios` (`id_usuario`, `nombres`, `apellidos`, `contraseña`, `rol`, `correo`) VALUES
+(1003837586, 'Cristhian', 'Rocha', '1234cristhian', 'supervisor', 'cristhian.rocha@gmail.com'),
+(1019154549, 'Jeison', 'Contreras', '1234jeison', 'admin', 'jeison.contreras@gmail.com'),
+(1032418528, 'Caren', 'Carrillo', '1234caren', 'usuario', 'caren.carillo@gmail.com');
 
 --
 -- Índices para tablas volcadas
@@ -224,14 +237,25 @@ ALTER TABLE `material_movimiento`
 -- Indices de la tabla `movimientos`
 --
 ALTER TABLE `movimientos`
-  ADD PRIMARY KEY (`id_movimiento`);
+  ADD PRIMARY KEY (`id_movimiento`),
+  ADD KEY `FOREING_CASOS` (`id_casos`),
+  ADD KEY `movimientos_ibfk_2` (`id_equipo`),
+  ADD KEY `movimientos_ibfk_3` (`id_material`);
+
+--
+-- Indices de la tabla `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`rol`),
+  ADD UNIQUE KEY `rol` (`rol`);
 
 --
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id_usuario`),
-  ADD UNIQUE KEY `id_usuario` (`id_usuario`);
+  ADD UNIQUE KEY `id_usuario` (`id_usuario`),
+  ADD KEY `roles_foreingk` (`rol`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -247,7 +271,7 @@ ALTER TABLE `materiales`
 -- AUTO_INCREMENT de la tabla `movimientos`
 --
 ALTER TABLE `movimientos`
-  MODIFY `id_movimiento` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_movimiento` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Restricciones para tablas volcadas
@@ -260,6 +284,12 @@ ALTER TABLE `movimientos`
   ADD CONSTRAINT `FOREING_CASOS` FOREIGN KEY (`id_casos`) REFERENCES `casos` (`id_casos`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `movimientos_ibfk_2` FOREIGN KEY (`id_equipo`) REFERENCES `equipos` (`id_equipo`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `movimientos_ibfk_3` FOREIGN KEY (`id_material`) REFERENCES `materiales` (`id_material`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD CONSTRAINT `roles_foreingk` FOREIGN KEY (`rol`) REFERENCES `roles` (`rol`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
