@@ -60,12 +60,12 @@
             </form>
         </div>
     <script>
-     document.getElementById('loginForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const usuario = document.getElementById('usuario').value;
-    const password = document.getElementById('password').value;
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const usuario = document.getElementById('usuario').value;
+        const password = document.getElementById('password').value;
 
-    const response = await fetch('auth/login', {
+        const response = await fetch('auth/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -73,17 +73,24 @@
         body: JSON.stringify({ usuario, password }),
     });
 
-    const result = await response.json();
-    if (result.success) {
+        const result = await response.json();
+        if (result.success) {
         // Guardar datos del usuario en localStorage
         localStorage.setItem('user', JSON.stringify(result.user));
 
-        alert('Inicio de sesión exitoso');
-        window.location.href = '/PRUEBAS.html';
-    } else {
+        // Redirigir según el rol del usuario
+        const userRole = result.user.rol;
+        if (userRole === 'admin' || userRole === 'supervisor') {
+            window.location.href = '/supervisor.html';
+        } else if (userRole === 'usuario') {
+            window.location.href = '/usuario.html';
+        } else {
+            alert('Rol desconocido, contacte al administrador');
+        }
+        } else {
         alert('Usuario o contraseña incorrectos');
-    }
-});
-  </script>
+        }
+        });
+     </script>
   </body>
 </html>

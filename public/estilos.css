@@ -76,9 +76,8 @@ input[type="submit"]:hover{
   font-size: xxx-large;
   color: #1c2120;
   float: inline-start;
-   
+  font-weight: bold; 
 }
-
 .salir{
   font-family: Arial, sans-serif;
   font-size: xxx-large;
@@ -151,6 +150,7 @@ input[type="submit"]:hover{
   border-radius: 5px;
   margin-left: 20px;
   margin-right: 20px;
+  
 }
 
 .casos{
