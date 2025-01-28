@@ -12,28 +12,37 @@
         <li class="name_user">Bienvenido</li>
         <li><a href="index.html" class="salir">SALIR<a/></li>
         </ul>
-    </div><br/><br/>
+    </div>    <div class = "registros"><br/><br/>
 
-    <h2>Registrar Equipo</h2>
+        <div class="registros-box">
+        <h2>Registrar Equipo</h2>
+        
+        <form id="formEquipo">
     
-    <form id="formEquipo">
-
-        <input type="text" id="id_casos_equipo" placeholder="Caso" required><br>
-        <input type="date" id="fecha_registro_equipo" required><br>
-        <input type="text" id="id_equipo" placeholder="ID Equipo" required><br>
-        <textarea id="observaciones_equipo" placeholder="Observaciones"></textarea><br>
-        <button type="submit">Registrar Equipo</button>
-    </form>
-
-    <h2>Registrar Material</h2>
-    <form id="formMaterial">
-        <input type="text" id="id_casos_material" placeholder="Caso" required><br>
-        <input type="date" id="fecha_registro_material" required><br>
-        <input type="number" id="id_material" placeholder="ID Material" required><br>
-        <input type="number" id="cantidad_material" placeholder="Cantidad" required><br>
-        <textarea id="observaciones_material" placeholder="Observaciones"></textarea><br>
-        <button type="submit">Registrar Material</button>
-    </form>
+            <input type="text" id="id_casos_equipo" placeholder="Caso" required><br>
+            <input type="date" id="fecha_registro_equipo" required><br>
+            <input type="text" id="id_equipo" placeholder="ID Equipo" required><br>
+            <textarea id="observaciones_equipo" placeholder="Observaciones"></textarea><br>
+            <br><br><br><br>
+            <button type="submit">Registrar Equipo</button>
+        </form>
+        </div>
+    
+        <div class="registros-box">
+        <h2>Registrar Material</h2>
+        <form id="formMaterial">
+            <input type="text" id="id_casos_material" placeholder="Caso" required><br>
+            <input type="date" id="fecha_registro_material" required><br>
+            <input type="number" id="id_material" placeholder="ID Material" required><br>
+            <input type="number" id="cantidad_material" placeholder="Cantidad" required><br>
+            <textarea id="observaciones_material" placeholder="Observaciones"></textarea><br>
+            <button type="submit">Registrar Material</button>
+        </form>
+        
+    
+        </div>
+        </div>
+        <div>
 
     <h2>Registros</h2>
     <table id="tablaRegistros">
