@@ -1,0 +1,4 @@
+id_caso,nombre_cliente,direccion_caso,fecha_caso,ciudad_caso
+CS000011,Grupo Exito,Calle 123,2024-02-01,Bogot 
+CS000012,ETB,Avenida 456,2024-02-02,Medell¡n
+CS000013,Grupo de energia Bogota,Carrera 789,2024-02-03,Cali

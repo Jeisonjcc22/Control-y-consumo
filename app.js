@@ -1,5 +1,7 @@
 //Ficha 2721427 Analisis y desarrollo de software API GA7-220501096-AA5-EV02
 //Proyecto CCM Control y consumo de material
+
+
 //Integrantes: Caren Carillo
 //             Cristhian Rocha
 //             Jeison Contreras
@@ -15,10 +17,11 @@ app.use(express.static('public')); // Carpeta donde están los archivos estátic
 
 
 // Importar rutas
-const authRoutes = require('./routes/auth');
-const registroRoutes = require('./routes/registros');
-const usuariosRoutes = require('./routes/usuarios');
-const casosRoutes = require('./routes/casos');
+const authRoutes = require('./routes/auth');                    // Ruta autenticacion.
+const registroRoutes = require('./routes/registros');           // Ruta Registros equipos o materiales.
+const usuariosRoutes = require('./routes/usuarios');            // Ruta Creacion usuario.
+const casosRoutes = require('./routes/casos');                  // Ruta Insercion de casos.
+const elementosRoutes = require('./routes/elementos');          // Ruta Insercion elementos.
 
 // Ruta para el inicio
 app.get('/inicio', (req, res) => {
@@ -31,6 +34,8 @@ app.use('/auth', authRoutes);
 app.use('/registros', registroRoutes);
 app.use('/usuarios', usuariosRoutes);
 app.use('/casos', casosRoutes);
+app.use('elementos', elementosRoutes);
+
 
 // Servidor
 app.listen(3000, () => {

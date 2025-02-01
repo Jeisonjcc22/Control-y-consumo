@@ -295,6 +295,38 @@ function cargarRegistros() {
 });
 
 
+// Manejador para carga masiva desde CSV
+document.getElementById('btnCargarCasos').addEventListener('click', async () => {
+    const archivoInput = document.getElementById('archivoCasos');
+    const archivo = archivoInput.files[0];
+
+    if (!archivo) {
+        alert('Seleccione un archivo CSV.');
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('archivo', archivo);
+
+    try {
+        const response = await fetch('http://localhost:3000/casos/cargarCasosCSV', {
+            method: 'POST',
+            body: formData
+        });
+
+        const responseData = await response.json();
+
+        if (!response.ok) {
+            throw new Error(responseData.message);
+        }
+
+        alert(responseData.message);
+        archivoInput.value = ''; // Limpiar el input file después de la carga
+    } catch (error) {
+        alert(`Error: ${error.message}`);
+    }
+});
+
 // Cargar registros al cargar la página
 cargarRegistros();
         </script>

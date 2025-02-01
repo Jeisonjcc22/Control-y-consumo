@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-02-2025 a las 22:52:10
+-- Tiempo de generación: 02-02-2025 a las 00:00:18
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -40,9 +40,11 @@ CREATE TABLE `casos` (
 --
 
 INSERT INTO `casos` (`id_casos`, `nombre_cliente`, `direccion_caso`, `fecha_caso`, `ciudad_caso`) VALUES
-('CS000010', 'Coorserpark', 'Carrera 11 # 69 - 11', '2025-01-31', 'Bogota'),
-('CS001000', 'Cencosud', 'Cl. 20 #82 - 52', '2024-11-01', 'Bogota'),
-('CS001005', 'Flores de Funza', 'Vereda la Argenita, ', '2024-11-08', 'Funza');
+('CS000001', 'Cooserpark', 'Cra 11 # 69-11', '2024-01-27', 'Bogota'),
+('CS000002', 'Cooserpark', 'Cl 136 #17A - 85', '2024-01-28', 'Bogota'),
+('CS000011', 'Grupo Exito', 'Calle 123', '2024-02-01', 'Bogota'),
+('CS000012', 'ETB', 'Avenida 456', '2024-02-02', 'Medellin'),
+('CS000013', 'Grupo de energia Bogota', 'Carrera 789', '2024-02-03', 'Cali');
 
 -- --------------------------------------------------------
 
@@ -137,19 +139,12 @@ CREATE TABLE `movimientos` (
 --
 
 INSERT INTO `movimientos` (`id_movimiento`, `id_usuario`, `id_casos`, `fecha_movimientos`, `id_equipo`, `id_material`, `observaciones`, `cantidad_material`) VALUES
-(1, 1019154549, 'CS001000', '2025-01-18', 'FTX0197374', NULL, 'Pruebas JS v5', NULL),
-(2, 1019154549, 'CS001000', '2025-01-18', NULL, 1, 'Pruebas JS V5', 100),
-(3, 1019154549, 'CS001000', '2025-01-18', 'FTX0197374', NULL, 'Pruebas J V5', NULL),
-(4, 1019154549, 'CS001000', '2025-01-18', 'FTX0197374', NULL, 'Pruebas JS V5', NULL),
-(5, 1032418528, 'CS001000', '2025-01-18', 'FTX0197374', NULL, 'Pruebas JS V5', NULL),
-(6, 1019154549, 'CS001000', '2025-01-18', 'FTX0197374', NULL, 'Pruebas', NULL),
-(7, 1019154549, 'CS001000', '2025-01-18', NULL, 1, 'Pruebas', 100),
-(8, 1019154549, 'CS001000', '2025-01-18', 'FTX0197374', NULL, 'ASDA\n', NULL),
-(9, 1019154549, 'CS001000', '2025-01-18', 'FTX0197374', NULL, 'ASDA\n', NULL),
-(10, 1019154549, 'CS001000', '2025-01-18', 'FTX0197374', NULL, 'ASDASD', NULL),
-(11, 1019154549, 'CS001000', '2025-01-18', 'FTX0197374', NULL, 'Pruebas', NULL),
-(12, 1019154549, 'CS001000', '2025-01-18', 'FTX0197374', NULL, 'Pruebas 2', NULL),
-(13, 1019154549, 'CS001000', '2025-01-18', 'FTX0197374', NULL, 'Pruebas', NULL);
+(1, 1019154549, 'CS000001', '2025-01-27', 'FTX0197374', NULL, 'Pruebas', NULL),
+(2, 1019154549, 'CS000002', '2025-01-27', 'FTX0197374', NULL, 'Pruebas', NULL),
+(3, 1019154549, 'CS000011', '2025-01-27', 'FTX0197374', NULL, 'Pruebas', NULL),
+(4, 1019154549, 'CS000012', '2025-01-27', 'FTX0197374', NULL, 'Pruebas', NULL),
+(5, 1019154549, 'CS000013', '2025-01-27', 'FTX0197374', NULL, 'Pruebas', NULL),
+(6, 1032418528, 'CS000001', '2025-01-27', NULL, 1, 'Pruebas', 100);
 
 -- --------------------------------------------------------
 
@@ -272,7 +267,7 @@ ALTER TABLE `materiales`
 -- AUTO_INCREMENT de la tabla `movimientos`
 --
 ALTER TABLE `movimientos`
-  MODIFY `id_movimiento` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_movimiento` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
