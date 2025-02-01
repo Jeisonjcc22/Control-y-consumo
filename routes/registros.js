@@ -106,22 +106,38 @@ router.post('/insertarMaterial', (req, res) => {
 });
 
 
-router.get('/getRegistros', (req, res) => {
-    const { id_usuario } = req.query; // Obtener id_usuario desde los parámetros de la URL
-    console.log('ID de usuario recibido:', id_usuario);
 
-    if (!id_usuario) {
-        return res.status(400).send('ID de usuario no proporcionado');
+//Ruta para obtener los registros de la tabla movimientos
+
+router.get('/getRegistros', (req, res) => {
+    const { id_usuario, rol } = req.query; // Obtener ID de usuario y rol
+
+    console.log('ID de usuario recibido:', id_usuario, 'Rol:', rol);
+
+    if (!id_usuario || !rol) {
+        return res.status(400).send('ID de usuario o rol no proporcionado');
     }
 
-    const query = 'SELECT * FROM movimientos WHERE id_usuario = ?';
-    connection.query(query, [id_usuario], (err, results) => {
+    let query;
+    let params = [];
+
+    if (rol === 'admin' || rol === 'supervisor') {
+        // Si el rol es administrador o supervisor, obtiene todos los registros
+        query = 'SELECT * FROM movimientos';
+    } else {
+        // Si es usuario normal, filtra por ID de usuario
+        query = 'SELECT * FROM movimientos WHERE id_usuario = ?';
+        params = [id_usuario];
+    }
+
+    connection.query(query, params, (err, results) => {
         if (err) {
             console.error('Error al obtener registros:', err);
             return res.status(500).send('Error al obtener registros');
         }
-        res.json(results); // Devolver solo los registros del usuario logueado
+        res.json(results);
     });
 });
+
 
 module.exports = router;

@@ -80,6 +80,7 @@
 
         // Redirigir según el rol del usuario
         const userRole = result.user.rol;
+        console.log("Respuesta del backend:", result);
         if (userRole === 'admin' || userRole === 'supervisor') {
             window.location.href = '/supervisor.html';
         } else if (userRole === 'usuario') {

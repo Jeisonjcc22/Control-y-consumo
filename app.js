@@ -21,7 +21,6 @@ const authRoutes = require('./routes/auth');                    // Ruta autentic
 const registroRoutes = require('./routes/registros');           // Ruta Registros equipos o materiales.
 const usuariosRoutes = require('./routes/usuarios');            // Ruta Creacion usuario.
 const casosRoutes = require('./routes/casos');                  // Ruta Insercion de casos.
-const elementosRoutes = require('./routes/elementos');          // Ruta Insercion elementos.
 
 // Ruta para el inicio
 app.get('/inicio', (req, res) => {
@@ -34,7 +33,7 @@ app.use('/auth', authRoutes);
 app.use('/registros', registroRoutes);
 app.use('/usuarios', usuariosRoutes);
 app.use('/casos', casosRoutes);
-app.use('elementos', elementosRoutes);
+
 
 
 // Servidor

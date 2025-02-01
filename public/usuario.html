@@ -12,6 +12,7 @@
         <li class="name_user">Bienvenido</li>
         <li><a href="index.html" class="salir">SALIR<a/></li>
         </ul>
+
     </div>    <div class = "registros"><br/><br/>
 
         <div class="registros-box">
@@ -140,10 +141,12 @@
 
 // Función para cargar registros específicos del usuario
 function cargarRegistros() {
-    const id_usuario = user.id_usuario; // Extraer el ID del usuario desde el objeto `user`
-    console.log('ID Usuario:', id_usuario); // Verificar que se esté obteniendo correctamente
+    const id_usuario = user.id_usuario; // Extraer el ID del usuario
+    const rol = user.rol; // Extraer el rol del usuario
 
-    fetch(`http://localhost:3000/registros/getRegistros?id_usuario=${id_usuario}`)
+    console.log('ID Usuario:', id_usuario, 'Rol:', rol);
+
+    fetch(`http://localhost:3000/registros/getRegistros?id_usuario=${id_usuario}&rol=${rol}`)
         .then((response) => response.json())
         .then((registros) => {
             tablaRegistros.innerHTML = '';
