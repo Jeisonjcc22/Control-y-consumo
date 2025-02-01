@@ -252,3 +252,58 @@ table thead th {
 table tbody td {
   overflow-wrap: break-word; /* Ajusta el texto largo */
 }
+
+
+
+
+
+
+
+
+
+
+
+/* Estilo para los botones */
+.opciones {
+  margin: 20px 0;
+  display: flex;
+  gap: 20px;
+}
+
+.opciones button {
+  background-color: #3294a1;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.opciones button:hover {
+  background-color: #186d79;
+}
+
+/* Formularios ocultos por defecto */
+.oculto {
+  display: none;
+}
+
+/* Estilo general para los formularios */
+.form-box {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+/* Formularios lado a lado */
+#registrar {
+  display: flex;
+  gap: 20px;
+}
+
+.registros-box {
+  flex: 1;
+}

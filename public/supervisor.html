@@ -6,59 +6,94 @@
     <title>Registro de Equipos y Materiales CCM</title>
     <link href="estilos.css" rel="stylesheet"/>
 </head>
-<body>
-    <div>
-        <ul class="menu">
+<div>
+    <ul class="menu">
         <li class="name_user">Bienvenido</li>
-        <li><a href="index.html" class="salir">SALIR<a/></li>
-        </ul>
-    </div>   
-    <div class = "registros"><br/><br/>
+        <li><a href="index.html" class="salir">SALIR</a></li>
+    </ul>
+</div>
+
+<!-- Botones para opciones -->
+<div class="opciones">
+    <button id="btnCrearUsuario">Crear Usuario</button>
+    <button id="btnInsertarCaso">Insertar Caso</button>
+    <button id="btnRegistrar">Registrar Equipo/Material</button>
+</div>
+
+<!-- Formulario para crear usuarios -->
+<div id="crearUsuario" class="form-box oculto">
+    <h2>Crear Usuario</h2>
+    <form id="formCrearUsuario">
+        <input type="text" id="id_nuevo_usuario" placeholder="ID" required><br>
+        <input type="text" id="nombre_usuario" placeholder="Nombres" required><br>
+        <input type="text" id="apellido_usuario" placeholder="Apellidos" required><br>
+        <input type="password" id="contrasena_usuario" placeholder="Contraseña" required><br>
+        <input type="text" id="rol_usuario" placeholder="Rol" required><br>
+        <input type="email" id="correo_usuario" placeholder="Correo" required><br>
+        <button type="submit">Crear Usuario</button>
+    </form>
+</div>
+
+<!-- Formulario para insertar casos -->
+<div id="insertarCaso" class="form-box oculto">
+    <h2>Insertar Caso</h2>
+    <form id="formInsertarCaso">
+        <input type="text" id="id_nuevo_caso" placeholder="ID Caso" required><br>
+        <input type="text" id="nombre_cliente" placeholder="Nombre Cliente" required><br>
+        <input type="text" id="direccion_caso" placeholder="Dirección Caso" required><br>
+        <input type="date" id="fecha_caso" required><br>
+        <input type="text" id="ciudad_caso" placeholder="Ciudad" required><br>
+        <button type="submit">Insertar Caso</button>
+    </form>
+    <h3>O cargar archivo para inserción masiva</h3>
+    <input type="file" id="archivoCasos" accept=".csv">
+    <button id="btnCargarCasos">Cargar Casos</button>
+</div>
+
+<!-- Formularios para registrar equipo y material -->
+
+<div id="registrar" class="form-box oculto">
+    <div class="registros-box">
+        <h2>Registrar Equipo</h2>
+        <form id="formEquipo">
+            <input type="text" id="id_casos_equipo" placeholder="Caso" required><br>
+            <input type="date" id="fecha_registro_equipo" required><br>
+            <input type="text" id="id_equipo" placeholder="ID Equipo" required><br>
+            <textarea id="observaciones_equipo" placeholder="Observaciones"></textarea><br><br><br>
+            <br><br><br>
+            <button type="submit">Registrar Equipo</button>
+        </form>
+    </div>
 
     <div class="registros-box">
-    <h2>Registrar Equipo</h2>
-    
-    <form id="formEquipo">
-
-        <input type="text" id="id_casos_equipo" placeholder="Caso" required><br>
-        <input type="date" id="fecha_registro_equipo" required><br>
-        <input type="text" id="id_equipo" placeholder="ID Equipo" required><br>
-        <textarea id="observaciones_equipo" placeholder="Observaciones"></textarea><br>
-        <br><br><br><br>
-        <button type="submit">Registrar Equipo</button>
-    </form>
+        <h2>Registrar Material</h2>
+        <form id="formMaterial">
+            <input type="text" id="id_casos_material" placeholder="Caso" required><br>
+            <input type="date" id="fecha_registro_material" required><br>
+            <input type="number" id="id_material" placeholder="ID Material" required><br>
+            <input type="number" id="cantidad_material" placeholder="Cantidad" required><br>
+            <textarea id="observaciones_material" placeholder="Observaciones"></textarea><br>
+            <button type="submit">Registrar Material</button>
+        </form>
     </div>
+</div>
 
-    <div class="registros-box">
-    <h2>Registrar Material</h2>
-    <form id="formMaterial">
-        <input type="text" id="id_casos_material" placeholder="Caso" required><br>
-        <input type="date" id="fecha_registro_material" required><br>
-        <input type="number" id="id_material" placeholder="ID Material" required><br>
-        <input type="number" id="cantidad_material" placeholder="Cantidad" required><br>
-        <textarea id="observaciones_material" placeholder="Observaciones"></textarea><br>
-        <button type="submit">Registrar Material</button>
-    </form>
-    
 
-    </div>
-    </div>
-    <div><br>
-    <h2>Registros</h2>
-    <table id="tablaRegistros">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Usuario</th>
-                <th>Caso</th>
-                <th>Fecha</th>
-                <th>ID Equipo</th>
-                <th>Material</th>
-                <th>Observaciones</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+<h2>Registros</h2>
+<table id="tablaRegistros">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Usuario</th>
+            <th>Caso</th>
+            <th>Fecha</th>
+            <th>ID Equipo</th>
+            <th>Material</th>
+            <th>Observaciones</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
 
     <script>
         const formEquipo = document.getElementById('formEquipo');
@@ -67,9 +102,18 @@
         const user = JSON.parse(localStorage.getItem('user'));
 
 
+         // Selección de elementos
+        const btnCrearUsuario = document.getElementById('btnCrearUsuario');
+        const btnInsertarCaso = document.getElementById('btnInsertarCaso');
+        const btnRegistrar = document.getElementById('btnRegistrar');
+        const crearUsuario = document.getElementById('crearUsuario');
+        const insertarCaso = document.getElementById('insertarCaso');
+        const registrar = document.getElementById('registrar');
+
+
         if (user) {
         const name_user = document.querySelector('.name_user');
-        name_user.textContent = `Bienvenid@@${user.nombres} ${user.apellidos}`;
+        name_user.textContent = `Bienvenid@ ${user.nombres} ${user.apellidos}`;
         } else {
         alert('No estás autenticado. Por favor, inicia sesión.');
         window.location.href = '/index.html'; // Redirigir al login si no hay datos del usuario
@@ -160,6 +204,96 @@ function cargarRegistros() {
         })
         .catch((err) => console.error('Error al cargar los registros:', err));
 }
+
+
+            // Mostrar/ocultar formularios
+            btnCrearUsuario.addEventListener('click', () => {
+            crearUsuario.classList.toggle('oculto');
+            insertarCaso.classList.add('oculto');
+            registrar.classList.add('oculto');
+        });
+
+        btnInsertarCaso.addEventListener('click', () => {
+            insertarCaso.classList.toggle('oculto');
+            crearUsuario.classList.add('oculto');
+            registrar.classList.add('oculto');
+        });
+
+        btnRegistrar.addEventListener('click', () => {
+            registrar.classList.toggle('oculto');
+            crearUsuario.classList.add('oculto');
+            insertarCaso.classList.add('oculto');
+        });
+
+
+        //Creacion de usuarios 
+
+        document.getElementById('formCrearUsuario').addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const usuario = {
+        id: document.getElementById('id_nuevo_usuario').value,
+        nombres: document.getElementById('nombre_usuario').value,
+        apellidos: document.getElementById('apellido_usuario').value,
+        contrasena: document.getElementById('contrasena_usuario').value,
+        rol: document.getElementById('rol_usuario').value,
+        correo: document.getElementById('correo_usuario').value
+    };
+
+    try {
+        const response = await fetch('http://localhost:3000/usuarios/insertarUsuario', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(usuario)
+        });
+
+        const responseData = await response.json();
+
+        if (!response.ok) {
+            throw new Error(responseData.message);
+        }
+
+        alert(responseData.message);
+    } catch (error) {
+        alert(`Error: ${error.message}`);
+    }
+});
+
+
+
+
+ //Creacion de Casos
+
+ document.getElementById('formInsertarCaso').addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const casos = {
+        id_caso: document.getElementById('id_nuevo_caso').value,
+        nombre_cliente: document.getElementById('nombre_cliente').value,
+        direccion_caso: document.getElementById('direccion_caso').value,
+        fecha_caso: document.getElementById('fecha_caso').value,
+        ciudad_caso: document.getElementById('ciudad_caso').value,
+    };
+
+    try {
+        const response = await fetch('http://localhost:3000/casos/insertarCaso', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(casos)
+        });
+
+        const responseData = await response.json();
+
+        if (!response.ok) {
+            throw new Error(responseData.message);
+        }
+
+        alert(responseData.message);
+    } catch (error) {
+        alert(`Error: ${error.message}`);
+    }
+});
+
 
 // Cargar registros al cargar la página
 cargarRegistros();

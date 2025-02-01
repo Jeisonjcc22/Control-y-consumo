@@ -17,6 +17,8 @@ app.use(express.static('public')); // Carpeta donde están los archivos estátic
 // Importar rutas
 const authRoutes = require('./routes/auth');
 const registroRoutes = require('./routes/registros');
+const usuariosRoutes = require('./routes/usuarios');
+const casosRoutes = require('./routes/casos');
 
 // Ruta para el inicio
 app.get('/inicio', (req, res) => {
@@ -27,6 +29,8 @@ app.get('/inicio', (req, res) => {
 // Usar rutas
 app.use('/auth', authRoutes);
 app.use('/registros', registroRoutes);
+app.use('/usuarios', usuariosRoutes);
+app.use('/casos', casosRoutes);
 
 // Servidor
 app.listen(3000, () => {

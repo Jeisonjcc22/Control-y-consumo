@@ -3,72 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Equipo y Material</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .form-container {
-            display: flex; /* Hacer los formularios horizontales */
-            justify-content: space-between; /* Espaciarlos uniformemente */
-            gap: 20px; /* Espaciado entre formularios */
-        }
-        .form-container .form-box {
-            flex: 1; /* Cada formulario ocupa el mismo ancho */
-            border: 1px solid #ccc;
-            padding: 20px;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        .form-container h2 {
-            margin-top: 0;
-        }
-        input, textarea, button {
-            display: block;
-            margin: 10px 0;
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-        }
-        button {
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <title>Registro de Equipos y Materiales CCM</title>
+    <link href="estilos.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="form-container">
-        <!-- Formulario de Registrar Equipo -->
-        <div class="form-box">
+    <div>
+        <ul class="menu">
+            <li class="name_user">Bienvenido</li>
+            <li><a href="index.html" class="salir">SALIR<a/></li>
+        </ul>
+    </div>
+
+    <!-- Botones para opciones -->
+    <div class="opciones">
+        <button id="btnCrearUsuario">Crear Usuario</button>
+        <button id="btnInsertarCaso">Insertar Caso</button>
+        <button id="btnRegistrar">Registrar Equipo/Material</button>
+    </div>
+
+    <!-- Formulario para crear usuarios -->
+    <div id="crearUsuario" class="form-box oculto">
+        <h2>Crear Usuario</h2>
+        <form id="formCrearUsuario">
+            <input type="text" id="id_usuario" placeholder="ID" required><br>
+            <input type="text" id="nombre_usuario" placeholder="Nombres" required><br>
+            <input type="text" id="apellido_usuario" placeholder="Apellidos" required><br>
+            <input type="password" id="contrasena_usuario" placeholder="Contraseña" required><br>
+            <input type="text" id="rol_usuario" placeholder="Rol" required><br>
+            <input type="email" id="correo_usuario" placeholder="Correo" required><br>
+            <button type="submit">Crear Usuario</button>
+        </form>
+    </div>
+
+    <!-- Formulario para insertar casos -->
+    <div id="insertarCaso" class="form-box oculto">
+        <h2>Insertar Caso</h2>
+        <form id="formInsertarCaso">
+            <input type="text" id="id_caso" placeholder="ID Caso" required><br>
+            <input type="text" id="nombre_cliente" placeholder="Nombre Cliente" required><br>
+            <input type="text" id="direccion_caso" placeholder="Dirección Caso" required><br>
+            <input type="date" id="fecha_caso" required><br>
+            <input type="text" id="ciudad_caso" placeholder="Ciudad" required><br>
+            <button type="submit">Insertar Caso</button>
+        </form>
+        <h3>O cargar archivo para inserción masiva</h3>
+        <input type="file" id="archivoCasos" accept=".csv">
+        <button id="btnCargarCasos">Cargar Casos</button>
+    </div>
+
+    <!-- Formularios para registrar equipo y material -->
+    <div id="registrar" class="form-box oculto">
+        <div class="registros-box">
             <h2>Registrar Equipo</h2>
             <form id="formEquipo">
-                <input type="text" id="id_casos_equipo" placeholder="Caso" required>
-                <input type="date" id="fecha_registro_equipo" required>
-                <input type="text" id="id_equipo" placeholder="ID Equipo" required>
-                <textarea id="observaciones_equipo" placeholder="Observaciones"></textarea>
-                <br></br>
+                <input type="text" id="id_casos_equipo" placeholder="Caso" required><br>
+                <input type="date" id="fecha_registro_equipo" required><br>
+                <input type="text" id="id_equipo" placeholder="ID Equipo" required><br>
+                <textarea id="observaciones_equipo" placeholder="Observaciones"></textarea><br><br><br>
+                <br><br><br>
                 <button type="submit">Registrar Equipo</button>
             </form>
         </div>
 
-        <!-- Formulario de Registrar Material -->
-        <div class="form-box">
+        <div class="registros-box">
             <h2>Registrar Material</h2>
             <form id="formMaterial">
-                <input type="text" id="id_casos_material" placeholder="Caso" required>
-                <input type="date" id="fecha_registro_material" required>
-                <input type="number" id="id_material" placeholder="ID Material" required>
-                <input type="number" id="cantidad_material" placeholder="Cantidad" required>
-                <textarea id="observaciones_material" placeholder="Observaciones"></textarea>
+                <input type="text" id="id_casos_material" placeholder="Caso" required><br>
+                <input type="date" id="fecha_registro_material" required><br>
+                <input type="number" id="id_material" placeholder="ID Material" required><br>
+                <input type="number" id="cantidad_material" placeholder="Cantidad" required><br>
+                <textarea id="observaciones_material" placeholder="Observaciones"></textarea><br>
                 <button type="submit">Registrar Material</button>
             </form>
         </div>
     </div>
-</body>
+
+
+    <h2>Registros</h2>
+    <table id="tablaRegistros">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Usuario</th>
+                <th>Caso</th>
+                <th>Fecha</th>
+                <th>ID Equipo</th>
+                <th>Material</th>
+                <th>Observaciones</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+
+    </body>
 </html>
+
+
+    <script>
+        // Selección de elementos
+        const btnCrearUsuario = document.getElementById('btnCrearUsuario');
+        const btnInsertarCaso = document.getElementById('btnInsertarCaso');
+        const btnRegistrar = document.getElementById('btnRegistrar');
+        const crearUsuario = document.getElementById('crearUsuario');
+        const insertarCaso = document.getElementById('insertarCaso');
+        const registrar = document.getElementById('registrar');
+
+        // Mostrar/ocultar formularios
+        btnCrearUsuario.addEventListener('click', () => {
+            crearUsuario.classList.toggle('oculto');
+            insertarCaso.classList.add('oculto');
+            registrar.classList.add('oculto');
+        });
+
+        btnInsertarCaso.addEventListener('click', () => {
+            insertarCaso.classList.toggle('oculto');
+            crearUsuario.classList.add('oculto');
+            registrar.classList.add('oculto');
+        });
+
+        btnRegistrar.addEventListener('click', () => {
+            registrar.classList.toggle('oculto');
+            crearUsuario.classList.add('oculto');
+            insertarCaso.classList.add('oculto');
+        });
+
+        // Lógica de envío para formularios
+        document.getElementById('formCrearUsuario').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Usuario creado exitosamente');
+        });
+
+        document.getElementById('formInsertarCaso').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Caso insertado exitosamente');
+        });
+
+        document.getElementById('formEquipo').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Equipo registrado exitosamente');
+        });
+
+        document.getElementById('formMaterial').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Material registrado exitosamente');
+        });
+    </script>
