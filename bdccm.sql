@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-01-2025 a las 00:46:45
+-- Tiempo de generación: 01-02-2025 a las 22:52:10
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Versión de PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `ccm`
 --
-CREATE DATABASE IF NOT EXISTS `ccm` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci;
-USE `ccm`;
 
 -- --------------------------------------------------------
 
@@ -31,17 +29,18 @@ USE `ccm`;
 
 CREATE TABLE `casos` (
   `id_casos` varchar(10) NOT NULL,
-  `nombre_cliente` varchar(20) NOT NULL,
+  `nombre_cliente` varchar(30) NOT NULL,
   `direccion_caso` varchar(20) NOT NULL,
   `fecha_caso` date NOT NULL,
-  `ciudad` varchar(20) NOT NULL
+  `ciudad_caso` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `casos`
 --
 
-INSERT INTO `casos` (`id_casos`, `nombre_cliente`, `direccion_caso`, `fecha_caso`, `ciudad`) VALUES
+INSERT INTO `casos` (`id_casos`, `nombre_cliente`, `direccion_caso`, `fecha_caso`, `ciudad_caso`) VALUES
+('CS000010', 'Coorserpark', 'Carrera 11 # 69 - 11', '2025-01-31', 'Bogota'),
 ('CS001000', 'Cencosud', 'Cl. 20 #82 - 52', '2024-11-01', 'Bogota'),
 ('CS001005', 'Flores de Funza', 'Vereda la Argenita, ', '2024-11-08', 'Funza');
 
@@ -191,7 +190,9 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `nombres`, `apellidos`, `contraseña`, `rol`, `correo`) VALUES
+(697293, 'Carlos', 'Perez', '1234carlos', 'usuario', 'carlos.perez@gmail.com'),
 (1003837586, 'Cristhian', 'Rocha', '1234cristhian', 'supervisor', 'cristhian.rocha@gmail.com'),
+(1011110251, 'Daniela', 'Blanco', '1234daniela', 'usuario', 'daniela.blanco@gmail.com'),
 (1019154549, 'Jeison', 'Contreras', '1234jeison', 'admin', 'jeison.contreras@gmail.com'),
 (1032418528, 'Caren', 'Carrillo', '1234caren', 'usuario', 'caren.carillo@gmail.com');
 
