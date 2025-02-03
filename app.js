@@ -8,10 +8,18 @@
 
 
 const express = require('express');
+const cors = require('cors'); // Importar CORS
 const bodyParser = require('body-parser');
 const app = express();
 
 // Middleware
+
+app.use(cors({
+    origin: ['http://192.168.31.196:3000', 'http://localhost:3000'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(bodyParser.json());
 app.use(express.static('public')); // Carpeta donde están los archivos estáticos
 

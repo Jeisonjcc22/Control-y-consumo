@@ -67,9 +67,8 @@ input[type="submit"]:hover{
 .name_user{
   font-family: Arial, sans-serif;
   font-size: xxx-large;
-  color: #1c2120;
-  float: inline-start;
-  font-weight: bold; 
+  color: white;
+  float: inline-start; 
 }
 .salir{
   font-family: Arial, sans-serif;
@@ -137,13 +136,11 @@ input[type="submit"]:hover{
 }
 .menu{
   list-style: none;
-  padding: 35px;
+  padding: 25px;
   background-color: #3294a1;
   height: 50px;
+  border: 1px solid black;
   border-radius: 5px;
-  margin-left: 20px;
-  margin-right: 20px;
-  
 }
 
 .casos{
@@ -306,4 +303,16 @@ table tbody td {
 
 .registros-box {
   flex: 1;
+}
+
+
+.salir{
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background: url('img/salir2.png') no-repeat center center;
+  background-size: cover;
+  cursor: pointer;
+  margin-right: 5px;
+  margin-top: 5px;
 }
