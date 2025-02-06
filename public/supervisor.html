@@ -190,7 +190,7 @@ function cargarRegistros() {
 
     console.log('ID Usuario:', id_usuario, 'Rol:', rol);
 
-    fetch(`http:/localhost:3000/registros/getRegistros?id_usuario=${id_usuario}&rol=${rol}`)
+    fetch(`http://localhost:3000/registros/getRegistros?id_usuario=${id_usuario}&rol=${rol}`)
         .then((response) => response.json())
         .then((registros) => {
             tablaRegistros.innerHTML = '';
